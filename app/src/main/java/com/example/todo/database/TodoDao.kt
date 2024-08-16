@@ -8,8 +8,8 @@ import androidx.room.Query
 @Dao
 interface TodoDao {
     @Query("SELECT * FROM todo")
-    suspend fun getTodos(): List<Todo>
+    suspend fun getTodos(): List<TodoEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTodo(todo: Todo)
+    suspend fun insertTodo(todo: TodoEntity)
 }
