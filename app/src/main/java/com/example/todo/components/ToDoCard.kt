@@ -30,7 +30,7 @@ fun ToDoCard(
             .fillMaxWidth()
             .height(150.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFF424138)
+            containerColor = Color(0xFF1D1C22)
         ),
         shape = RectangleShape,
         onClick = {}
