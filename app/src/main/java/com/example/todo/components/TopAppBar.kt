@@ -34,7 +34,7 @@ fun TopAppBar() {
     )
 }
 
-@Preview
+@Preview(showSystemUi = true)
 @Composable
 fun PreviewTopAppBar() {
     TopAppBar()
