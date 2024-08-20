@@ -3,22 +3,9 @@ package com.example.todo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedContentTransitionScope
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.todo.components.TopAppBar
 import com.example.todo.screens.HomeScreen
 import com.example.todo.screens.ScreenB
 import com.example.todo.screens.ScreenC
@@ -32,42 +19,35 @@ class MainActivity : ComponentActivity() {
 
 
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = "home" ){
+                NavHost(navController = navController, startDestination = Routes.HOME){
                     composable(
-                        route = "home",
-                        exitTransition = {
-                            slideOutOfContainer(
-                                AnimatedContentTransitionScope.SlideDirection.Left ,
-                                tween(1000)
-                            )
-                        }
+                        route = Routes.HOME
                     ){
                         HomeScreen(todoList = emptyList(),
                             navigateToB = {
-                                navController.navigate("screen_b")
+                                navController.navigate(Routes.SCREEN_B)
                             }
                             )
                             
                         }
                     composable(
-                        route = "screen_b"
+                        route = Routes.SCREEN_B
                     ){
                         ScreenB(
                             navigateToHome = {
                                 navController.popBackStack()
-//                                NavController.navigate(route = "home")
                             },
                             navigateToC = {
-                                navController.navigate("screen_c")
+                                navController.navigate(Routes.SCREEN_C)
                             }
 
                         )
                     }
                     composable(
-                        route = "screen_c"
+                        route = Routes.SCREEN_C
                     ){
                         ScreenC(navigateToHome = {
-                            navController.navigate("home"){
+                            navController.navigate(Routes.HOME){
                                 popUpTo(0)
                             }
 

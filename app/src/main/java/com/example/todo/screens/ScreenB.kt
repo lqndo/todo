@@ -1,6 +1,5 @@
 package com.example.todo.screens
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -51,9 +50,8 @@ fun ScreenB(
 }
 @Preview
 @Composable
-fun ScreenB_Prev()
-{
-//    ScreenB()
+fun PreviewScreenB(){
+    ScreenB(navigateToHome = {}, navigateToC = {})
 }
 
 
