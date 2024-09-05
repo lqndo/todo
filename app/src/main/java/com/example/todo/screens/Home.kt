@@ -1,23 +1,40 @@
 package com.example.todo.screens
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.todo.Routes
 import com.example.todo.ToDo
 import com.example.todo.components.ToDoCard
+import com.example.todo.components.TopAppBar
 
 @Composable
 fun HomeScreen (
-    todoList: List<ToDo>
+    todoList: List<ToDo>,
+    navigateToNote:()-> Unit
 ) {
-    LazyColumn (
-        modifier = Modifier.fillMaxSize()
-    ){
-        items(todoList) { todo ->
-            ToDoCard(title = todo.title, content = todo.content)
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                route = Routes.HOME,
+                navigateToHome = {},
+                navigateToNote = navigateToNote
+            )
+        }
+    ) { it->
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it)
+        ) {
+            items(todoList) { todo ->
+                ToDoCard(title = todo.title, content = todo.content)
+            }
         }
     }
 }
@@ -28,5 +45,5 @@ fun PreviewHomeScreen() {
     val sampleTodoList = List(20) { index ->
         ToDo(title = "Tarea $index", content = "Descripción de la tarea $index")
     }
-    HomeScreen(todoList = sampleTodoList)
+    HomeScreen(todoList = sampleTodoList, navigateToNote = {})
 }
