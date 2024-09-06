@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.sp
 
@@ -30,7 +31,7 @@ fun ToDoCard(
             .fillMaxWidth()
             .height(150.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFF1D1C22)
+            containerColor = MaterialTheme.colorScheme.secondary
         ),
         shape = RectangleShape,
         onClick = {}
