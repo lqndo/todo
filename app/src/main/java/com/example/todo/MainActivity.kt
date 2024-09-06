@@ -13,6 +13,7 @@ import com.example.todo.ui.theme.TodoTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             TodoTheme {
                 val navController = rememberNavController()
@@ -20,17 +21,18 @@ class MainActivity : ComponentActivity() {
                     composable(
                         route = Routes.HOME
                     ) {
-                        HomeScreen(todoList = emptyList(),
+                        HomeScreen(
+                            todoList = emptyList(),
                             navigateToNote = {
                                 navController.navigate(Routes.NOTE)
                             }
                         )
-
                     }
                     composable(
                         route = Routes.NOTE
                     ) {
-                        NoteScreen(title = "Title",
+                        NoteScreen(
+                            title = "Title",
                             content = "Content",
                             navigateToHome = {
                                 navController.popBackStack()

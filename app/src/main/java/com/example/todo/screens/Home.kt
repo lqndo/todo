@@ -14,10 +14,7 @@ import com.example.todo.components.ToDoCard
 import com.example.todo.components.TopAppBar
 
 @Composable
-fun HomeScreen (
-    todoList: List<ToDo>,
-    navigateToNote:()-> Unit
-) {
+fun HomeScreen(todoList: List<ToDo>, navigateToNote: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -26,7 +23,7 @@ fun HomeScreen (
                 navigateToNote = navigateToNote
             )
         }
-    ) { it->
+    ) { it ->
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()

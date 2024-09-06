@@ -24,27 +24,31 @@ import com.example.todo.Routes
 import com.example.todo.components.TopAppBar
 
 @Composable
-fun NoteScreen(
-    title : String,
-    content : String,
-    navigateToHome:()->Unit
-) {
+fun NoteScreen(title: String, content: String, navigateToHome: () -> Unit) {
     var titleText by remember { mutableStateOf(TextFieldValue("")) }
     var contentText by remember { mutableStateOf(TextFieldValue("")) }
+
     Scaffold(
         topBar = {
-            TopAppBar(route = Routes.NOTE, navigateToHome = navigateToHome, navigateToNote = {})
+            TopAppBar(
+                route = Routes.NOTE,
+                navigateToHome = navigateToHome,
+                navigateToNote = {}
+            )
         }
-    ) { it->
+    ) { it ->
         Column(
-            modifier = Modifier.padding(it)
+            modifier = Modifier
+                .padding(it)
                 .fillMaxSize()
                 .background(Color(0xFF1D1C22))
-                .padding(15.dp),
+                .padding(15.dp)
         ) {
             OutlinedTextField(
                 value = titleText,
-                modifier = Modifier.height(70.dp).fillMaxWidth(),
+                modifier = Modifier
+                    .height(70.dp)
+                    .fillMaxWidth(),
                 onValueChange = {
                     titleText = it
                 },
@@ -61,7 +65,8 @@ fun NoteScreen(
 
             OutlinedTextField(
                 value = contentText,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
                     .fillMaxWidth(),
                 onValueChange = {
                     contentText = it
