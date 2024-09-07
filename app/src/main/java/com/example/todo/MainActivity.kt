@@ -11,7 +11,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -20,17 +19,14 @@ import com.example.todo.database.TodoDatabase
 import com.example.todo.screens.HomeScreen
 import com.example.todo.screens.NoteScreen
 import com.example.todo.ui.theme.TodoTheme
-import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val context = this
-        lifecycleScope.launch {
-            val todoDatabase = TodoDatabase.getDatabase(context)
-            val todos = todoDatabase.dao().getTodos()
-        }
+        val dao = TodoDatabase.getDatabase(context).dao()
+        val repository = TodoRepository(dao)
 
         setContent {
             TodoTheme {
@@ -61,7 +57,9 @@ class MainActivity : ComponentActivity() {
                         composable(
                             route = Routes.HOME
                         ) {
-                            HomeScreen(todoList = emptyList())
+                            HomeScreen(
+                                loadTodos = repository::loadTodos
+                            )
                         }
 
                         composable(
