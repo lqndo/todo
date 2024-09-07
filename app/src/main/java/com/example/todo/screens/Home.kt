@@ -23,7 +23,7 @@ fun HomeScreen(todoList: List<ToDo>, navigateToNote: () -> Unit) {
                 navigateToNote = navigateToNote
             )
         }
-    ) { it ->
+    ) {
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()

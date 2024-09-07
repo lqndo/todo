@@ -19,6 +19,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.todo.Routes
 import com.example.todo.components.TopAppBar
@@ -83,6 +84,7 @@ fun NoteScreen(title: String, content: String, navigateToHome: () -> Unit) {
     }
 }
 
+@Preview(showSystemUi = true)
 @Composable
 fun PreviewNoteScreen() {
     NoteScreen(title = "Title", content = "Content", navigateToHome = {})
