@@ -73,12 +73,10 @@ fun NoteScreen(title: String, content: String) {
             colors = OutlinedTextFieldDefaults.colors(
                 focusedContainerColor = MaterialTheme.colorScheme.secondary,
                 unfocusedContainerColor = MaterialTheme.colorScheme.secondary
-            ),
+            )
         )
     }
 }
-
-
 
 @Preview(showSystemUi = true)
 @Composable
