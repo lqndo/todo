@@ -35,65 +35,53 @@ fun NoteScreen(title: String, content: String) {
             .padding(15.dp)
     ) {
         OutlinedTextField(
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = MaterialTheme.colorScheme.secondary,
-                unfocusedContainerColor = MaterialTheme.colorScheme.secondary
-            ),
             value = titleText,
-            onValueChange = {
-                titleText = it
-            },
             modifier = Modifier
                 .height(70.dp)
                 .fillMaxWidth(),
+            onValueChange = {
+                titleText = it
+            },
             label = {
                 Text(
                     text = "Title",
                     color = Color.White
                 )
-            }
+            },
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = MaterialTheme.colorScheme.secondary,
+                unfocusedContainerColor = MaterialTheme.colorScheme.secondary
+            )
         )
 
         Spacer(modifier = Modifier.height(20.dp))
 
         OutlinedTextField(
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = MaterialTheme.colorScheme.secondary,
-                unfocusedContainerColor = MaterialTheme.colorScheme.secondary
-            ),
             value = contentText,
-            onValueChange = {
-                contentText = it
-            },
             modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth(),
+            onValueChange = {
+                contentText = it
+            },
             label = {
                 Text(
                     text = "Content",
                     color = Color.White
                 )
-            }
+            },
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = MaterialTheme.colorScheme.secondary,
+                unfocusedContainerColor = MaterialTheme.colorScheme.secondary
+            )
         )
     }
 }
 
-@Preview(showSystemUi = true) // , device = Devices.TABLET)
+@Preview(showSystemUi = true)
 @Composable
 fun PreviewNoteScreen() {
     TodoTheme {
         NoteScreen(title = "Title", content = "Content")
     }
 }
-
-/*
-* colors = OutlinedTextFieldDefaults.colors(
-        focusedBorderColor = MaterialTheme.colorScheme.primary,
-        unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
-        cursorColor = MaterialTheme.colorScheme.primary,
-        focusedTextColor = MaterialTheme.colorScheme.onPrimary,
-        unfocusedTextColor = MaterialTheme.colorScheme.onPrimary,
-        focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-        unfocusedLabelColor = MaterialTheme.colorScheme.onSecondary
-    ),
-* */
