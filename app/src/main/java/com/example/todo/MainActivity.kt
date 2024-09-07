@@ -52,12 +52,7 @@ class MainActivity : ComponentActivity() {
                         composable(
                             route = Routes.HOME
                         ) {
-                            HomeScreen(
-                                todoList = emptyList(),
-                                navigateToNote = {
-                                    navController.navigate(Routes.NOTE)
-                                }
-                            )
+                            HomeScreen(todoList = emptyList())
                         }
 
                         composable(
@@ -65,10 +60,7 @@ class MainActivity : ComponentActivity() {
                         ) {
                             NoteScreen(
                                 title = "Title",
-                                content = "Content",
-                                navigateToHome = {
-                                    navController.popBackStack()
-                                }
+                                content = "Content"
                             )
                         }
                     }

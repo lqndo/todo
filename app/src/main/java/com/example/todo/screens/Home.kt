@@ -10,7 +10,7 @@ import com.example.todo.ToDo
 import com.example.todo.components.ToDoCard
 
 @Composable
-fun HomeScreen(todoList: List<ToDo>, navigateToNote: () -> Unit) {
+fun HomeScreen(todoList: List<ToDo>) {
     LazyColumn(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -26,5 +26,5 @@ fun PreviewHomeScreen() {
     val sampleTodoList = List(20) { index ->
         ToDo(title = "Tarea $index", content = "Descripción de la tarea $index")
     }
-    HomeScreen(todoList = sampleTodoList, navigateToNote = {})
+    HomeScreen(todoList = sampleTodoList)
 }

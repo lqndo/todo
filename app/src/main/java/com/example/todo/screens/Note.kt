@@ -22,7 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun NoteScreen(title: String, content: String, navigateToHome: () -> Unit) {
+fun NoteScreen(title: String, content: String) {
     var titleText by remember { mutableStateOf(TextFieldValue("")) }
     var contentText by remember { mutableStateOf(TextFieldValue("")) }
 
@@ -73,5 +73,5 @@ fun NoteScreen(title: String, content: String, navigateToHome: () -> Unit) {
 @Preview(showSystemUi = true)
 @Composable
 fun PreviewNoteScreen() {
-    NoteScreen(title = "Title", content = "Content", navigateToHome = {})
+    NoteScreen(title = "Title", content = "Content")
 }
