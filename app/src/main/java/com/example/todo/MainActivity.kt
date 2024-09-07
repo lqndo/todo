@@ -6,6 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -21,18 +25,25 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             TodoTheme {
+                val navController = rememberNavController()
+                var currentRoute by remember { mutableStateOf(Routes.HOME) }
+
+                navController.addOnDestinationChangedListener { _, destination, _ ->
+                    destination.route?.let { route ->
+                        currentRoute = route
+                    }
+                }
+
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     topBar = {
                         TopAppBar(
-                            route = Routes.HOME,
-                            navigateToHome = {},
-                            navigateToNote = {}
+                            route = currentRoute,
+                            navigateToHome = { navController.popBackStack() },
+                            navigateToNote = { navController.navigate(Routes.NOTE) }
                         )
                     }
                 ) { paddings ->
-                    val navController = rememberNavController()
-
                     NavHost(
                         modifier = Modifier.padding(paddings),
                         navController = navController,
