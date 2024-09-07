@@ -7,12 +7,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.todo.ToDo
+import com.example.todo.Todo
 import com.example.todo.components.ToDoCard
 
 @Composable
-fun HomeScreen(loadTodos: suspend () -> List<ToDo>) {
-    var todoList = emptyList<ToDo>()
+fun HomeScreen(loadTodos: suspend () -> List<Todo>) {
+    var todoList = emptyList<Todo>()
 
     LaunchedEffect(Unit) {
         todoList = loadTodos()
@@ -31,7 +31,7 @@ fun HomeScreen(loadTodos: suspend () -> List<ToDo>) {
 @Composable
 fun PreviewHomeScreen() {
     val sampleTodoList = List(20) { index ->
-        ToDo(title = "Tarea $index", content = "Descripción de la tarea $index")
+        Todo(title = "Tarea $index", content = "Descripción de la tarea $index")
     }
 
     HomeScreen(

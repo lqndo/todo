@@ -2,7 +2,7 @@ package com.example.todo.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.todo.ToDo
+import com.example.todo.Todo
 
 @Entity(tableName = "todo")
 data class TodoEntity(
@@ -12,7 +12,7 @@ data class TodoEntity(
     val content: String
 )
 
-fun TodoEntity.toDomain() = ToDo(
+fun TodoEntity.toDomain() = Todo(
     title = this.title,
     content = this.content
 )

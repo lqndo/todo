@@ -2,12 +2,12 @@ package com.example.todo
 
 import com.example.todo.database.TodoEntity
 
-data class ToDo(
+data class Todo(
     val title: String,
     val content: String
 )
 
-fun ToDo.toEntity() = TodoEntity(
+fun Todo.toEntity() = TodoEntity(
     title = this.title,
     content = this.content
 )
