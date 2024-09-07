@@ -10,4 +10,9 @@ class TodoRepository(private val dao: TodoDao) {
             entity.toDomain()
         }
     }
+
+    suspend fun insertTodo(todo: ToDo) {
+        val entity = todo.toEntity()
+        dao.insertTodo(entity)
+    }
 }
