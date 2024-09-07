@@ -19,73 +19,66 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.todo.ui.theme.TodoTheme
 
 @Composable
-fun NoteScreen(
-    title : String,
-    content : String
-) {
-    var titleText by remember { mutableStateOf(TextFieldValue(""))}
+fun NoteScreen(title: String, content: String) {
+    var titleText by remember { mutableStateOf(TextFieldValue("")) }
     var contentText by remember { mutableStateOf(TextFieldValue("")) }
-        Column (
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = MaterialTheme.colorScheme.primary)
+            .padding(15.dp)
+    ) {
+        OutlinedTextField(
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = MaterialTheme.colorScheme.secondary,
+                unfocusedContainerColor = MaterialTheme.colorScheme.secondary
+            ),
+            value = titleText,
+            onValueChange = {
+                titleText = it
+            },
             modifier = Modifier
-                .fillMaxSize()
-                .background(color = MaterialTheme.colorScheme.primary)
-                .padding(15.dp)
-        ) {
-            OutlinedTextField(
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = MaterialTheme.colorScheme.secondary,
-                    unfocusedContainerColor = MaterialTheme.colorScheme.secondary
-                ),
-                value = titleText,
-                onValueChange = {
-                    titleText = it
-                },
-                modifier = Modifier
-                    .height(70.dp)
-                    .fillMaxWidth(),
-                label = {
-                    Text(
-                        text = "Title",
-                        color = Color.White
-                    )
-                },
-            )
-
-            Spacer(
-                modifier = Modifier.height(20.dp)
-            )
-
-                OutlinedTextField(
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedContainerColor = MaterialTheme.colorScheme.secondary,
-                        unfocusedContainerColor = MaterialTheme.colorScheme.secondary
-                    ),
-                    value = contentText,
-                    onValueChange = {
-                        contentText = it
-                    },
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxWidth(),
-                    label = {
-                        Text(
-                            text = "Content",
-                            color = Color.White
-                        )
-                    },
+                .height(70.dp)
+                .fillMaxWidth(),
+            label = {
+                Text(
+                    text = "Title",
+                    color = Color.White
                 )
             }
-        }
+        )
 
+        Spacer(modifier = Modifier.height(20.dp))
 
+        OutlinedTextField(
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = MaterialTheme.colorScheme.secondary,
+                unfocusedContainerColor = MaterialTheme.colorScheme.secondary
+            ),
+            value = contentText,
+            onValueChange = {
+                contentText = it
+            },
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth(),
+            label = {
+                Text(
+                    text = "Content",
+                    color = Color.White
+                )
+            }
+        )
+    }
+}
 
-@Preview(showSystemUi = true) //, device = Devices.TABLET)
+@Preview(showSystemUi = true) // , device = Devices.TABLET)
 @Composable
 fun PreviewNoteScreen() {
     TodoTheme {

@@ -1,6 +1,6 @@
 package com.example.todo
 
 data class ToDo(
-    val title : String,
-    val content : String,
+    val title: String,
+    val content: String
 )
