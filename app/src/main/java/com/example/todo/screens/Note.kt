@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -20,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.todo.ui.theme.TodoTheme
 
 @Composable
 fun NoteScreen(title: String, content: String) {
@@ -29,7 +31,7 @@ fun NoteScreen(title: String, content: String) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF1D1C22))
+            .background(color = MaterialTheme.colorScheme.primary)
             .padding(15.dp)
     ) {
         OutlinedTextField(
@@ -46,7 +48,10 @@ fun NoteScreen(title: String, content: String) {
                     color = Color.White
                 )
             },
-            colors = OutlinedTextFieldDefaults.colors(Color.White)
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = MaterialTheme.colorScheme.secondary,
+                unfocusedContainerColor = MaterialTheme.colorScheme.secondary
+            )
         )
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -65,13 +70,20 @@ fun NoteScreen(title: String, content: String) {
                     color = Color.White
                 )
             },
-            colors = OutlinedTextFieldDefaults.colors(Color.White)
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = MaterialTheme.colorScheme.secondary,
+                unfocusedContainerColor = MaterialTheme.colorScheme.secondary
+            ),
         )
     }
 }
 
+
+
 @Preview(showSystemUi = true)
 @Composable
 fun PreviewNoteScreen() {
-    NoteScreen(title = "Title", content = "Content")
+    TodoTheme {
+        NoteScreen(title = "Title", content = "Content")
+    }
 }
