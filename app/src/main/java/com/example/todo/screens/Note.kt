@@ -34,7 +34,7 @@ fun NoteScreen(
         Column (
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = MaterialTheme.colorScheme.primary)
+                .background(MaterialTheme.colorScheme.background)
                 .padding(15.dp)
         ) {
             OutlinedTextField(
@@ -52,7 +52,7 @@ fun NoteScreen(
                 label = {
                     Text(
                         text = "Title",
-                        color = Color.White
+                        color = MaterialTheme.colorScheme.onSecondary
                     )
                 },
             )
@@ -76,7 +76,7 @@ fun NoteScreen(
                     label = {
                         Text(
                             text = "Content",
-                            color = Color.White
+                            color = MaterialTheme.colorScheme.secondary
                         )
                     },
                 )
@@ -88,7 +88,7 @@ fun NoteScreen(
 @Preview(showSystemUi = true) //, device = Devices.TABLET)
 @Composable
 fun PreviewNoteScreen() {
-    TodoTheme {
+    TodoTheme(darkTheme = true) {
         NoteScreen(title = "Title", content = "Content")
     }
 }

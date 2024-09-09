@@ -19,6 +19,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.sp
+import com.example.todo.ui.theme.TodoTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -44,14 +45,14 @@ fun ToDoCard(
                 maxLines = 1,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 25.sp,
-                color = Color.White
+                color = MaterialTheme.colorScheme.onSecondary
             )
             Spacer(modifier = Modifier.height(10.dp))
             Text(
                 text = content,
                 maxLines = 2,
                 fontSize = 18.sp,
-                color = Color.White
+                color = MaterialTheme.colorScheme.onSecondary
             )
         }
 
@@ -61,5 +62,7 @@ fun ToDoCard(
 @Preview(showSystemUi = true)
 @Composable
 fun PreviewCard() {
-    ToDoCard(title = "Title", content = "Content")
+    TodoTheme (darkTheme = false){
+        ToDoCard(title = "Title", content = "Content")
+    }
 }
