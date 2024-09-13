@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -29,13 +28,13 @@ fun NoteScreen(title: String, content: String) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+            .background(TodoTheme.colors.background)
             .padding(15.dp)
     ) {
         OutlinedTextField(
             colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = MaterialTheme.colorScheme.primary,
-                unfocusedContainerColor = MaterialTheme.colorScheme.primary
+                focusedContainerColor = TodoTheme.colors.primary,
+                unfocusedContainerColor = TodoTheme.colors.primary
             ),
             value = titleText,
             onValueChange = {
@@ -47,7 +46,7 @@ fun NoteScreen(title: String, content: String) {
             label = {
                 Text(
                     text = "Title",
-                    color = MaterialTheme.colorScheme.onPrimary
+                    color = TodoTheme.colors.onPrimary
                 )
             }
         )
@@ -58,8 +57,8 @@ fun NoteScreen(title: String, content: String) {
 
         OutlinedTextField(
             colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = MaterialTheme.colorScheme.primary,
-                unfocusedContainerColor = MaterialTheme.colorScheme.primary
+                focusedContainerColor = TodoTheme.colors.primary,
+                unfocusedContainerColor = TodoTheme.colors.primary
             ),
             value = contentText,
             onValueChange = {
@@ -71,7 +70,7 @@ fun NoteScreen(title: String, content: String) {
             label = {
                 Text(
                     text = "Content",
-                    color = MaterialTheme.colorScheme.onPrimary
+                    color = TodoTheme.colors.onPrimary
                 )
             }
         )
