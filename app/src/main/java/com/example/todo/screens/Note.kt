@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -17,7 +16,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -31,7 +29,7 @@ fun NoteScreen(title: String, content: String) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.primary)
+            .background(color = TodoTheme.colors.primary)
             .padding(15.dp)
     ) {
         OutlinedTextField(
@@ -45,12 +43,12 @@ fun NoteScreen(title: String, content: String) {
             label = {
                 Text(
                     text = "Title",
-                    color = Color.White
+                    color = TodoTheme.colors.onPrimary
                 )
             },
             colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = MaterialTheme.colorScheme.secondary,
-                unfocusedContainerColor = MaterialTheme.colorScheme.secondary
+                focusedContainerColor = TodoTheme.colors.secondary,
+                unfocusedContainerColor = TodoTheme.colors.secondary
             )
         )
 
@@ -67,12 +65,12 @@ fun NoteScreen(title: String, content: String) {
             label = {
                 Text(
                     text = "Content",
-                    color = Color.White
+                    color = TodoTheme.colors.onPrimary
                 )
             },
             colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = MaterialTheme.colorScheme.secondary,
-                unfocusedContainerColor = MaterialTheme.colorScheme.secondary
+                focusedContainerColor = TodoTheme.colors.secondary,
+                unfocusedContainerColor = TodoTheme.colors.secondary
             )
         )
     }
@@ -81,7 +79,7 @@ fun NoteScreen(title: String, content: String) {
 @Preview(showSystemUi = true)
 @Composable
 fun PreviewNoteScreen() {
-    TodoTheme {
+    TodoTheme(darkTheme = true) {
         NoteScreen(title = "Title", content = "Content")
     }
 }

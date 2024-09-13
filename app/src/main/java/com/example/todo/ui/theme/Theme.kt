@@ -9,39 +9,36 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-private val LightColorScheme = lightColorScheme(
-    primary = LightWhite,
-    secondary = LightGrey,
-    tertiary = SimpleGrey
+private val DarkColorScheme = darkColorScheme(
+    background = DarkBlue,
+    onBackground = OnBackgroundWhite,
+    primary = NavyBlue,
+    secondary = BlueGray,
+    onPrimary = WhiteText,
+    onSecondary = WhiteText
 )
 
-private val DarkColorScheme = darkColorScheme(
-    primary = DarkBlue,
-    secondary = NavyBlue,
-    tertiary = BlueGray
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-     */
+private val LightColorScheme = lightColorScheme(
+    background = BackgroundWhite,
+    onBackground = OnBackgroundBlack,
+    primary = LightGrey,
+    secondary = GreyBlue,
+    onPrimary = BlackText,
+    onSecondary = BlackText
 )
 
 @Composable
 fun TodoTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -62,9 +59,21 @@ fun TodoTheme(
         }
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
+    val scheme = if (darkTheme) TodoDarkColorScheme else TodoLightColorScheme
+
+    CompositionLocalProvider(
+        LocalAppColorStyles provides scheme
+    ) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = Typography,
+            content = content
+        )
+    }
+}
+
+object TodoTheme {
+    val colors: TodoColorStyles
+        @Composable
+        get() = LocalAppColorStyles.current
 }
