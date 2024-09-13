@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,7 +31,7 @@ fun ToDoCard(
             .fillMaxWidth()
             .height(150.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondary
+            containerColor = MaterialTheme.colorScheme.primary
         ),
         shape = RectangleShape,
         onClick = {}
@@ -45,14 +44,14 @@ fun ToDoCard(
                 maxLines = 1,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 25.sp,
-                color = MaterialTheme.colorScheme.onSecondary
+                color = MaterialTheme.colorScheme.onPrimary
             )
             Spacer(modifier = Modifier.height(10.dp))
             Text(
                 text = content,
                 maxLines = 2,
                 fontSize = 18.sp,
-                color = MaterialTheme.colorScheme.onSecondary
+                color = MaterialTheme.colorScheme.onPrimary
             )
         }
 
@@ -62,7 +61,7 @@ fun ToDoCard(
 @Preview(showSystemUi = true)
 @Composable
 fun PreviewCard() {
-    TodoTheme (darkTheme = false){
+    TodoTheme (darkTheme = true){
         ToDoCard(title = "Title", content = "Content")
     }
 }

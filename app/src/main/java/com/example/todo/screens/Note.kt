@@ -17,9 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.todo.ui.theme.TodoTheme
@@ -39,8 +37,8 @@ fun NoteScreen(
         ) {
             OutlinedTextField(
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = MaterialTheme.colorScheme.secondary,
-                    unfocusedContainerColor = MaterialTheme.colorScheme.secondary
+                    focusedContainerColor = MaterialTheme.colorScheme.primary,
+                    unfocusedContainerColor = MaterialTheme.colorScheme.primary
                 ),
                 value = titleText,
                 onValueChange = {
@@ -52,7 +50,7 @@ fun NoteScreen(
                 label = {
                     Text(
                         text = "Title",
-                        color = MaterialTheme.colorScheme.onSecondary
+                        color = MaterialTheme.colorScheme.onPrimary
                     )
                 },
             )
@@ -63,8 +61,8 @@ fun NoteScreen(
 
                 OutlinedTextField(
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedContainerColor = MaterialTheme.colorScheme.secondary,
-                        unfocusedContainerColor = MaterialTheme.colorScheme.secondary
+                        focusedContainerColor = MaterialTheme.colorScheme.primary,
+                        unfocusedContainerColor = MaterialTheme.colorScheme.primary
                     ),
                     value = contentText,
                     onValueChange = {
@@ -76,7 +74,7 @@ fun NoteScreen(
                     label = {
                         Text(
                             text = "Content",
-                            color = MaterialTheme.colorScheme.secondary
+                            color = MaterialTheme.colorScheme.onPrimary
                         )
                     },
                 )
@@ -92,15 +90,3 @@ fun PreviewNoteScreen() {
         NoteScreen(title = "Title", content = "Content")
     }
 }
-
-/*
-* colors = OutlinedTextFieldDefaults.colors(
-        focusedBorderColor = MaterialTheme.colorScheme.primary,
-        unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
-        cursorColor = MaterialTheme.colorScheme.primary,
-        focusedTextColor = MaterialTheme.colorScheme.onPrimary,
-        unfocusedTextColor = MaterialTheme.colorScheme.onPrimary,
-        focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-        unfocusedLabelColor = MaterialTheme.colorScheme.onSecondary
-    ),
-* */
