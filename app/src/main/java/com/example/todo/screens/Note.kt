@@ -25,54 +25,53 @@ import com.example.todo.ui.theme.TodoTheme
 fun NoteScreen(title: String, content: String) {
     var titleText by remember { mutableStateOf(TextFieldValue("")) }
     var contentText by remember { mutableStateOf(TextFieldValue("")) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(TodoTheme.colors.background)
+            .background(color = TodoTheme.colors.primary)
             .padding(15.dp)
     ) {
         OutlinedTextField(
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = TodoTheme.colors.primary,
-                unfocusedContainerColor = TodoTheme.colors.primary
-            ),
             value = titleText,
-            onValueChange = {
-                titleText = it
-            },
             modifier = Modifier
                 .height(70.dp)
                 .fillMaxWidth(),
+            onValueChange = {
+                titleText = it
+            },
             label = {
                 Text(
                     text = "Title",
                     color = TodoTheme.colors.onPrimary
                 )
-            }
+            },
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = TodoTheme.colors.secondary,
+                unfocusedContainerColor = TodoTheme.colors.secondary
+            )
         )
 
-        Spacer(
-            modifier = Modifier.height(20.dp)
-        )
+        Spacer(modifier = Modifier.height(20.dp))
 
         OutlinedTextField(
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = TodoTheme.colors.primary,
-                unfocusedContainerColor = TodoTheme.colors.primary
-            ),
             value = contentText,
-            onValueChange = {
-                contentText = it
-            },
             modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth(),
+            onValueChange = {
+                contentText = it
+            },
             label = {
                 Text(
                     text = "Content",
                     color = TodoTheme.colors.onPrimary
                 )
-            }
+            },
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = TodoTheme.colors.secondary,
+                unfocusedContainerColor = TodoTheme.colors.secondary
+            )
         )
     }
 }
