@@ -21,14 +21,16 @@ class MainActivity : ComponentActivity() {
             TodoTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
                 ) {
-                    Scaffold (
-                        modifier = Modifier.fillMaxSize(), topBar = {
+                    Scaffold(
+                        modifier = Modifier.fillMaxSize(),
+                        topBar = {
                             TopAppBar()
                         },
                         content = {
-                            Column (
+                            Column(
                                 modifier = Modifier.padding(it)
                             ) {
                                 Text(text = "Home")

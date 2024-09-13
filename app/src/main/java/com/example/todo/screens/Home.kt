@@ -10,12 +10,10 @@ import com.example.todo.ToDo
 import com.example.todo.components.ToDoCard
 
 @Composable
-fun HomeScreen (
-    todoList: List<ToDo>
-) {
-    LazyColumn (
+fun HomeScreen(todoList: List<ToDo>) {
+    LazyColumn(
         modifier = Modifier.fillMaxSize()
-    ){
+    ) {
         items(todoList) { todo ->
             ToDoCard(title = todo.title, content = todo.content)
         }

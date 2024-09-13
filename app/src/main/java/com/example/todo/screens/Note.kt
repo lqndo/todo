@@ -23,67 +23,62 @@ import androidx.compose.ui.unit.dp
 import com.example.todo.ui.theme.TodoTheme
 
 @Composable
-fun NoteScreen(
-    title : String,
-    content : String
-) {
-    var titleText by remember { mutableStateOf(TextFieldValue(""))}
+fun NoteScreen(title: String, content: String) {
+    var titleText by remember { mutableStateOf(TextFieldValue("")) }
     var contentText by remember { mutableStateOf(TextFieldValue("")) }
-        Column (
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+            .padding(15.dp)
+    ) {
+        OutlinedTextField(
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = MaterialTheme.colorScheme.primary,
+                unfocusedContainerColor = MaterialTheme.colorScheme.primary
+            ),
+            value = titleText,
+            onValueChange = {
+                titleText = it
+            },
             modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
-                .padding(15.dp)
-        ) {
-            OutlinedTextField(
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = MaterialTheme.colorScheme.primary,
-                    unfocusedContainerColor = MaterialTheme.colorScheme.primary
-                ),
-                value = titleText,
-                onValueChange = {
-                    titleText = it
-                },
-                modifier = Modifier
-                    .height(70.dp)
-                    .fillMaxWidth(),
-                label = {
-                    Text(
-                        text = "Title",
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                },
-            )
-
-            Spacer(
-                modifier = Modifier.height(20.dp)
-            )
-
-                OutlinedTextField(
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedContainerColor = MaterialTheme.colorScheme.primary,
-                        unfocusedContainerColor = MaterialTheme.colorScheme.primary
-                    ),
-                    value = contentText,
-                    onValueChange = {
-                        contentText = it
-                    },
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxWidth(),
-                    label = {
-                        Text(
-                            text = "Content",
-                            color = MaterialTheme.colorScheme.onPrimary
-                        )
-                    },
+                .height(70.dp)
+                .fillMaxWidth(),
+            label = {
+                Text(
+                    text = "Title",
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
             }
-        }
+        )
 
+        Spacer(
+            modifier = Modifier.height(20.dp)
+        )
 
+        OutlinedTextField(
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = MaterialTheme.colorScheme.primary,
+                unfocusedContainerColor = MaterialTheme.colorScheme.primary
+            ),
+            value = contentText,
+            onValueChange = {
+                contentText = it
+            },
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth(),
+            label = {
+                Text(
+                    text = "Content",
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
+            }
+        )
+    }
+}
 
-@Preview(showSystemUi = true) //, device = Devices.TABLET)
+@Preview(showSystemUi = true)
 @Composable
 fun PreviewNoteScreen() {
     TodoTheme(darkTheme = true) {
