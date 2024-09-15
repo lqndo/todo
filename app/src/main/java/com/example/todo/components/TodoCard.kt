@@ -20,7 +20,7 @@ import com.example.todo.ui.theme.TodoTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ToDoCard(title: String, content: String) {
+fun TodoCard(title: String, content: String, navigateToTodo: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -29,7 +29,7 @@ fun ToDoCard(title: String, content: String) {
             containerColor = TodoTheme.colors.primary
         ),
         shape = RectangleShape,
-        onClick = {}
+        onClick = navigateToTodo
     ) {
         Column(
             modifier = Modifier.padding(15.dp)
@@ -54,8 +54,10 @@ fun ToDoCard(title: String, content: String) {
 
 @Preview(showSystemUi = true)
 @Composable
-fun PreviewCard() {
-    TodoTheme(darkTheme = true) {
-        ToDoCard(title = "Title", content = "Content")
-    }
+fun PreviewTodoCard() {
+    TodoCard(
+        title = "Title",
+        content = "Content",
+        navigateToTodo = {}
+    )
 }

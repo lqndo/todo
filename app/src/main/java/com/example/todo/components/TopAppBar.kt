@@ -1,10 +1,11 @@
 package com.example.todo.components
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -24,7 +25,12 @@ import com.example.todo.Routes
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBar(route: String, navigateToHome: () -> Unit, navigateToNote: () -> Unit) {
+fun TopAppBar(
+    route: String,
+    saveTodo: () -> Unit,
+    navigateToHome: () -> Unit,
+    navigateToTodo: () -> Unit
+) {
     CenterAlignedTopAppBar(
         title = {
             Text(
@@ -35,7 +41,7 @@ fun TopAppBar(route: String, navigateToHome: () -> Unit, navigateToNote: () -> U
         navigationIcon = {
             var openDialog by remember { mutableStateOf(false) }
 
-            if (route == Routes.NOTE) {
+            if (route == Routes.TODO) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_leftarrow),
                     contentDescription = null,
@@ -80,14 +86,19 @@ fun TopAppBar(route: String, navigateToHome: () -> Unit, navigateToNote: () -> U
                     contentDescription = null,
                     modifier = Modifier
                         .size(35.dp)
-                        .clickable(onClick = navigateToNote)
+                        .clickable(onClick = navigateToTodo)
                 )
-            } else if (route == Routes.NOTE) {
+            } else if (route == Routes.TODO) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_ok),
                     contentDescription = null,
                     modifier = Modifier
-                        .clickable(onClick = navigateToHome)
+                        .clickable(
+                            onClick = {
+                                saveTodo()
+                                navigateToHome()
+                            }
+                        )
                         .size(35.dp)
                 )
             }
@@ -95,8 +106,21 @@ fun TopAppBar(route: String, navigateToHome: () -> Unit, navigateToNote: () -> U
     )
 }
 
-@Preview(showSystemUi = true)
+@Preview()
 @Composable
 fun PreviewTopAppBar() {
-    TopAppBar(route = Routes.NOTE, navigateToHome = {}) {}
+    Column {
+        TopAppBar(
+            route = Routes.TODO,
+            saveTodo = {},
+            navigateToHome = {},
+            navigateToTodo = {}
+        )
+        TopAppBar(
+            route = Routes.HOME,
+            saveTodo = {},
+            navigateToHome = {},
+            navigateToTodo = {}
+        )
+    }
 }
