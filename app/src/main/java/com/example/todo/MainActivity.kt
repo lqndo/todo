@@ -73,7 +73,8 @@ fun MainScreen(repository: TodoRepository) {
                 route = Routes.HOME
             ) {
                 HomeScreen(
-                    todos = todos
+                    todos = todos,
+                    loadTodos = homeViewModel::loadTodos
                 )
             }
 

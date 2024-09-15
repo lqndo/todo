@@ -16,11 +16,11 @@ class HomeViewModel(
 
     init {
         viewModelScope.launch {
-            _todos.value = loadTodos()
+            loadTodos()
         }
     }
 
-    private suspend fun loadTodos(): List<Todo> {
-        return repository.loadTodos()
+    suspend fun loadTodos() {
+        _todos.value = repository.loadTodos()
     }
 }

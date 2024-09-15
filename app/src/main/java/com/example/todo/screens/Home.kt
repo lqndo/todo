@@ -4,13 +4,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.todo.Todo
 import com.example.todo.components.ToDoCard
 
 @Composable
-fun HomeScreen(todos: List<Todo>) {
+fun HomeScreen(todos: List<Todo>, loadTodos: suspend () -> Unit) {
+    LaunchedEffect(Unit) {
+        loadTodos()
+    }
+
     LazyColumn(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -28,6 +33,7 @@ fun PreviewHomeScreen() {
     }
 
     HomeScreen(
-        todos = sampleTodoList
+        todos = sampleTodoList,
+        loadTodos = {}
     )
 }
