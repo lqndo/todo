@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.todo.components.TopAppBar
 import com.example.todo.database.TodoDatabase
 import com.example.todo.screens.HomeScreen
@@ -63,11 +64,21 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable(
-                            route = Routes.NOTE
-                        ) {
+                            route = Routes.NOTE,
+                            arguments = listOf(
+                                navArgument("id") {
+                                    nullable = true
+                                    defaultValue = null
+                                }
+                            )
+                        ) { backStackEntry ->
+                            val id = backStackEntry.arguments?.getString("id")
+
                             NoteScreen(
                                 title = "Title",
-                                content = "Content"
+                                content = "Content",
+                                loadTodo = repository::loadTodo,
+                                insertTodo = repository::insertTodo
                             )
                         }
                     }

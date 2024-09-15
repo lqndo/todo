@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -15,16 +16,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.todo.Todo
 import com.example.todo.ui.theme.TodoTheme
+import kotlinx.coroutines.launch
 
 @Composable
-fun NoteScreen(title: String, content: String) {
+fun NoteScreen(
+    title: String,
+    content: String,
+    loadTodo: suspend (Int) -> Todo,
+    insertTodo: suspend (Todo) -> Unit
+) {
+    val coroutine = rememberCoroutineScope()
     var titleText by remember { mutableStateOf(TextFieldValue("")) }
     var contentText by remember { mutableStateOf(TextFieldValue("")) }
 
@@ -75,13 +85,31 @@ fun NoteScreen(title: String, content: String) {
                 unfocusedContainerColor = MaterialTheme.colorScheme.secondary
             )
         )
+
+        Button(
+            onClick = {
+                val todo = Todo(title = titleText.text, content = contentText.text)
+                coroutine.launch {
+                    insertTodo(todo)
+                }
+            }
+        ) {
+            Text(text = "Save")
+        }
     }
 }
 
 @Preview(showSystemUi = true)
 @Composable
 fun PreviewNoteScreen() {
+    val todo = Todo(title = "title", content = "content")
+
     TodoTheme {
-        NoteScreen(title = "Title", content = "Content")
+        NoteScreen(
+            title = "Title",
+            content = "Content",
+            loadTodo = { todo },
+            insertTodo = {}
+        )
     }
 }
