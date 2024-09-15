@@ -13,6 +13,7 @@ data class TodoEntity(
 )
 
 fun TodoEntity.toDomain() = Todo(
+    id = this.id,
     title = this.title,
     content = this.content
 )
