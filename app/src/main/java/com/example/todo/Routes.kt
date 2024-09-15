@@ -2,5 +2,5 @@ package com.example.todo
 
 object Routes {
     const val HOME = "home"
-    const val NOTE = "note?id={id}"
+    const val TODO = "todo?id={id}"
 }

@@ -24,7 +24,7 @@ import com.example.todo.Routes
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBar(route: String, navigateToHome: () -> Unit, navigateToNote: () -> Unit) {
+fun TopAppBar(route: String, navigateToHome: () -> Unit, navigateToTodo: () -> Unit) {
     CenterAlignedTopAppBar(
         title = {
             Text(
@@ -35,7 +35,7 @@ fun TopAppBar(route: String, navigateToHome: () -> Unit, navigateToNote: () -> U
         navigationIcon = {
             var openDialog by remember { mutableStateOf(false) }
 
-            if (route == Routes.NOTE) {
+            if (route == Routes.TODO) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_leftarrow),
                     contentDescription = null,
@@ -80,9 +80,9 @@ fun TopAppBar(route: String, navigateToHome: () -> Unit, navigateToNote: () -> U
                     contentDescription = null,
                     modifier = Modifier
                         .size(35.dp)
-                        .clickable(onClick = navigateToNote)
+                        .clickable(onClick = navigateToTodo)
                 )
-            } else if (route == Routes.NOTE) {
+            } else if (route == Routes.TODO) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_ok),
                     contentDescription = null,
@@ -98,5 +98,5 @@ fun TopAppBar(route: String, navigateToHome: () -> Unit, navigateToNote: () -> U
 @Preview(showSystemUi = true)
 @Composable
 fun PreviewTopAppBar() {
-    TopAppBar(route = Routes.NOTE, navigateToHome = {}) {}
+    TopAppBar(route = Routes.TODO, navigateToHome = {}) {}
 }

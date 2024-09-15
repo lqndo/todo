@@ -19,7 +19,7 @@ import androidx.navigation.navArgument
 import com.example.todo.components.TopAppBar
 import com.example.todo.database.TodoDatabase
 import com.example.todo.screens.HomeScreen
-import com.example.todo.screens.NoteScreen
+import com.example.todo.screens.TodoScreen
 import com.example.todo.ui.theme.TodoTheme
 import com.example.todo.viewmodels.HomeViewModel
 
@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
                         TopAppBar(
                             route = currentRoute,
                             navigateToHome = { navController.popBackStack() },
-                            navigateToNote = { navController.navigate(Routes.NOTE) }
+                            navigateToTodo = { navController.navigate(Routes.TODO) }
                         )
                     }
                 ) { paddings ->
@@ -70,7 +70,7 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable(
-                            route = Routes.NOTE,
+                            route = Routes.TODO,
                             arguments = listOf(
                                 navArgument("id") {
                                     nullable = true
@@ -80,7 +80,7 @@ class MainActivity : ComponentActivity() {
                         ) { backStackEntry ->
                             val id = backStackEntry.arguments?.getString("id")
 
-                            NoteScreen(
+                            TodoScreen(
                                 title = "Title",
                                 content = "Content",
                                 loadTodo = repository::loadTodo,

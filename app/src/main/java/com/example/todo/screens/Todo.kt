@@ -28,7 +28,7 @@ import com.example.todo.ui.theme.TodoTheme
 import kotlinx.coroutines.launch
 
 @Composable
-fun NoteScreen(
+fun TodoScreen(
     title: String,
     content: String,
     loadTodo: suspend (Int) -> Todo,
@@ -101,11 +101,11 @@ fun NoteScreen(
 
 @Preview(showSystemUi = true)
 @Composable
-fun PreviewNoteScreen() {
+fun PreviewTodoScreen() {
     val todo = Todo(title = "title", content = "content")
 
     TodoTheme {
-        NoteScreen(
+        TodoScreen(
             title = "Title",
             content = "Content",
             loadTodo = { todo },
