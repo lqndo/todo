@@ -109,7 +109,8 @@ fun MainScreen(repository: TodoRepository) {
                     content = content,
                     updateTitle = todoViewModel::updateTitle,
                     updateContent = todoViewModel::updateContent,
-                    loadTodo = todoViewModel::loadTodo
+                    loadTodo = todoViewModel::loadTodo,
+                    clean = todoViewModel::clean
                 )
             }
         }

@@ -27,10 +27,13 @@ fun TodoScreen(
     content: String,
     updateTitle: (String) -> Unit,
     updateContent: (String) -> Unit,
-    loadTodo: (Int) -> Unit
+    loadTodo: (Int) -> Unit,
+    clean: () -> Unit
 ) {
     LaunchedEffect(Unit) {
-        id?.let {
+        if (id == null) {
+            clean()
+        } else {
             loadTodo(id)
         }
     }
@@ -93,7 +96,8 @@ fun PreviewTodoScreen() {
             content = todo.content,
             updateTitle = {},
             updateContent = {},
-            loadTodo = {}
+            loadTodo = {},
+            clean = {}
         )
     }
 }

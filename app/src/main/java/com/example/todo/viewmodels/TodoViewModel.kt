@@ -42,4 +42,9 @@ class TodoViewModel(
             repository.insertTodo(todo)
         }
     }
+
+    fun clean() {
+        _title.value = ""
+        _content.value = ""
+    }
 }
