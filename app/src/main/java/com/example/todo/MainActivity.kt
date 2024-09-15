@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -20,6 +21,7 @@ import com.example.todo.database.TodoDatabase
 import com.example.todo.screens.HomeScreen
 import com.example.todo.screens.NoteScreen
 import com.example.todo.ui.theme.TodoTheme
+import com.example.todo.viewmodels.HomeViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +31,11 @@ class MainActivity : ComponentActivity() {
         val dao = TodoDatabase.getDatabase(context).dao()
         val repository = TodoRepository(dao)
 
+        val homeViewModel = HomeViewModel(repository)
+
         setContent {
+            val todos by homeViewModel.todos.collectAsState()
+
             TodoTheme {
                 val navController = rememberNavController()
                 var currentRoute by remember { mutableStateOf(Routes.HOME) }
@@ -59,7 +65,7 @@ class MainActivity : ComponentActivity() {
                             route = Routes.HOME
                         ) {
                             HomeScreen(
-                                loadTodos = repository::loadTodos
+                                todos = todos
                             )
                         }
 
