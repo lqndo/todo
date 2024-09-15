@@ -11,7 +11,7 @@ import com.example.todo.Todo
 import com.example.todo.components.TodoCard
 
 @Composable
-fun HomeScreen(todos: List<Todo>, loadTodos: suspend () -> Unit) {
+fun HomeScreen(todos: List<Todo>, loadTodos: suspend () -> Unit, navigateToTodo: (Int) -> Unit) {
     LaunchedEffect(Unit) {
         loadTodos()
     }
@@ -20,7 +20,11 @@ fun HomeScreen(todos: List<Todo>, loadTodos: suspend () -> Unit) {
         modifier = Modifier.fillMaxSize()
     ) {
         items(todos) { todo ->
-            TodoCard(title = todo.title, content = todo.content)
+            TodoCard(
+                title = todo.title,
+                content = todo.content,
+                navigateToTodo = { navigateToTodo(todo.id!!) }
+            )
         }
     }
 }
@@ -34,6 +38,7 @@ fun PreviewHomeScreen() {
 
     HomeScreen(
         todos = sampleTodoList,
-        loadTodos = {}
+        loadTodos = {},
+        navigateToTodo = {}
     )
 }

@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TodoCard(title: String, content: String) {
+fun TodoCard(title: String, content: String, navigateToTodo: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -30,7 +30,7 @@ fun TodoCard(title: String, content: String) {
             containerColor = MaterialTheme.colorScheme.secondary
         ),
         shape = RectangleShape,
-        onClick = {}
+        onClick = navigateToTodo
     ) {
         Column(
             modifier = Modifier.padding(15.dp)
@@ -56,5 +56,9 @@ fun TodoCard(title: String, content: String) {
 @Preview(showSystemUi = true)
 @Composable
 fun PreviewTodoCard() {
-    TodoCard(title = "Title", content = "Content")
+    TodoCard(
+        title = "Title",
+        content = "Content",
+        navigateToTodo = {}
+    )
 }

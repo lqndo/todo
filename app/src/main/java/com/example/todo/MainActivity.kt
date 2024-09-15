@@ -78,7 +78,16 @@ fun MainScreen(repository: TodoRepository) {
             ) {
                 HomeScreen(
                     todos = todos,
-                    loadTodos = homeViewModel::loadTodos
+                    loadTodos = homeViewModel::loadTodos,
+                    navigateToTodo = { id ->
+                        navController.navigate(
+                            Routes.TODO
+                                .replace(
+                                    oldValue = "{id}",
+                                    newValue = id.toString()
+                                )
+                        )
+                    }
                 )
             }
 
