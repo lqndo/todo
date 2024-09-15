@@ -13,10 +13,10 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,16 +25,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.todo.Todo
 import com.example.todo.ui.theme.TodoTheme
-import kotlinx.coroutines.launch
 
 @Composable
-fun TodoScreen(
-    title: String,
-    content: String,
-    loadTodo: suspend (Int) -> Todo,
-    insertTodo: suspend (Todo) -> Unit
-) {
-    val coroutine = rememberCoroutineScope()
+fun TodoScreen(id: Int?, loadTodo: (Int) -> Unit, saveTodo: () -> Unit) {
+    LaunchedEffect(Unit) {
+        id?.let {
+            loadTodo(id)
+        }
+    }
     var titleText by remember { mutableStateOf(TextFieldValue("")) }
     var contentText by remember { mutableStateOf(TextFieldValue("")) }
 
@@ -87,12 +85,7 @@ fun TodoScreen(
         )
 
         Button(
-            onClick = {
-                val todo = Todo(title = titleText.text, content = contentText.text)
-                coroutine.launch {
-                    insertTodo(todo)
-                }
-            }
+            onClick = saveTodo
         ) {
             Text(text = "Save")
         }
@@ -106,10 +99,9 @@ fun PreviewTodoScreen() {
 
     TodoTheme {
         TodoScreen(
-            title = "Title",
-            content = "Content",
-            loadTodo = { todo },
-            insertTodo = {}
+            id = null,
+            loadTodo = {},
+            saveTodo = {}
         )
     }
 }

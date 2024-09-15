@@ -23,6 +23,7 @@ import com.example.todo.screens.HomeScreen
 import com.example.todo.screens.TodoScreen
 import com.example.todo.ui.theme.TodoTheme
 import com.example.todo.viewmodels.HomeViewModel
+import com.example.todo.viewmodels.TodoViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +53,7 @@ fun MainScreen(repository: TodoRepository) {
     }
 
     val homeViewModel = HomeViewModel(repository)
+    val todoViewModel = TodoViewModel(repository)
     val todos by homeViewModel.todos.collectAsState()
 
     Scaffold(
@@ -87,13 +89,12 @@ fun MainScreen(repository: TodoRepository) {
                     }
                 )
             ) { backStackEntry ->
-                val id = backStackEntry.arguments?.getString("id")
+                val id = backStackEntry.arguments?.getString("id")?.toInt()
 
                 TodoScreen(
-                    title = "Title",
-                    content = "Content",
-                    loadTodo = repository::loadTodo,
-                    insertTodo = repository::insertTodo
+                    id = id,
+                    loadTodo = todoViewModel::loadTodo,
+                    saveTodo = todoViewModel::saveTodo
                 )
             }
         }
