@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -31,64 +32,68 @@ class MainActivity : ComponentActivity() {
         val dao = TodoDatabase.getDatabase(context).dao()
         val repository = TodoRepository(dao)
 
-        val homeViewModel = HomeViewModel(repository)
-
         setContent {
-            val todos by homeViewModel.todos.collectAsState()
-
             TodoTheme {
-                val navController = rememberNavController()
-                var currentRoute by remember { mutableStateOf(Routes.HOME) }
+                MainScreen(repository)
+            }
+        }
+    }
+}
 
-                navController.addOnDestinationChangedListener { _, destination, _ ->
-                    destination.route?.let { route ->
-                        currentRoute = route
+@Composable
+fun MainScreen(repository: TodoRepository) {
+    val navController = rememberNavController()
+    var currentRoute by remember { mutableStateOf(Routes.HOME) }
+
+    navController.addOnDestinationChangedListener { _, destination, _ ->
+        destination.route?.let { route ->
+            currentRoute = route
+        }
+    }
+
+    val homeViewModel = HomeViewModel(repository)
+    val todos by homeViewModel.todos.collectAsState()
+
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        topBar = {
+            TopAppBar(
+                route = currentRoute,
+                navigateToHome = { navController.popBackStack() },
+                navigateToTodo = { navController.navigate(Routes.TODO) }
+            )
+        }
+    ) { paddings ->
+        NavHost(
+            modifier = Modifier.padding(paddings),
+            navController = navController,
+            startDestination = Routes.HOME
+        ) {
+            composable(
+                route = Routes.HOME
+            ) {
+                HomeScreen(
+                    todos = todos
+                )
+            }
+
+            composable(
+                route = Routes.TODO,
+                arguments = listOf(
+                    navArgument("id") {
+                        nullable = true
+                        defaultValue = null
                     }
-                }
+                )
+            ) { backStackEntry ->
+                val id = backStackEntry.arguments?.getString("id")
 
-                Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                    topBar = {
-                        TopAppBar(
-                            route = currentRoute,
-                            navigateToHome = { navController.popBackStack() },
-                            navigateToTodo = { navController.navigate(Routes.TODO) }
-                        )
-                    }
-                ) { paddings ->
-                    NavHost(
-                        modifier = Modifier.padding(paddings),
-                        navController = navController,
-                        startDestination = Routes.HOME
-                    ) {
-                        composable(
-                            route = Routes.HOME
-                        ) {
-                            HomeScreen(
-                                todos = todos
-                            )
-                        }
-
-                        composable(
-                            route = Routes.TODO,
-                            arguments = listOf(
-                                navArgument("id") {
-                                    nullable = true
-                                    defaultValue = null
-                                }
-                            )
-                        ) { backStackEntry ->
-                            val id = backStackEntry.arguments?.getString("id")
-
-                            TodoScreen(
-                                title = "Title",
-                                content = "Content",
-                                loadTodo = repository::loadTodo,
-                                insertTodo = repository::insertTodo
-                            )
-                        }
-                    }
-                }
+                TodoScreen(
+                    title = "Title",
+                    content = "Content",
+                    loadTodo = repository::loadTodo,
+                    insertTodo = repository::insertTodo
+                )
             }
         }
     }
