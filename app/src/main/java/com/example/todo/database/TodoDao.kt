@@ -10,6 +10,9 @@ interface TodoDao {
     @Query("SELECT * FROM todo")
     suspend fun getTodos(): List<TodoEntity>
 
+    @Query("SELECT * FROM todo WHERE id = :id")
+    suspend fun getTodo(id: Int): TodoEntity
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTodo(todo: TodoEntity)
 }
