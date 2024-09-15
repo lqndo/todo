@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -28,8 +27,7 @@ fun TodoScreen(
     content: String,
     updateTitle: (String) -> Unit,
     updateContent: (String) -> Unit,
-    loadTodo: (Int) -> Unit,
-    saveTodo: () -> Unit
+    loadTodo: (Int) -> Unit
 ) {
     LaunchedEffect(Unit) {
         id?.let {
@@ -80,12 +78,6 @@ fun TodoScreen(
                 unfocusedContainerColor = MaterialTheme.colorScheme.secondary
             )
         )
-
-        Button(
-            onClick = saveTodo
-        ) {
-            Text(text = "Save")
-        }
     }
 }
 
@@ -101,8 +93,7 @@ fun PreviewTodoScreen() {
             content = todo.content,
             updateTitle = {},
             updateContent = {},
-            loadTodo = {},
-            saveTodo = {}
+            loadTodo = {}
         )
     }
 }

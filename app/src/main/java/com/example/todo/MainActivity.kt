@@ -63,6 +63,7 @@ fun MainScreen(repository: TodoRepository) {
         topBar = {
             TopAppBar(
                 route = currentRoute,
+                saveTodo = todoViewModel::saveTodo,
                 navigateToHome = { navController.popBackStack() },
                 navigateToTodo = { navController.navigate(Routes.TODO) }
             )
@@ -108,8 +109,7 @@ fun MainScreen(repository: TodoRepository) {
                     content = content,
                     updateTitle = todoViewModel::updateTitle,
                     updateContent = todoViewModel::updateContent,
-                    loadTodo = todoViewModel::loadTodo,
-                    saveTodo = todoViewModel::saveTodo
+                    loadTodo = todoViewModel::loadTodo
                 )
             }
         }

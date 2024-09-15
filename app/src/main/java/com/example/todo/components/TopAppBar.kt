@@ -1,6 +1,7 @@
 package com.example.todo.components
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -24,7 +25,12 @@ import com.example.todo.Routes
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBar(route: String, navigateToHome: () -> Unit, navigateToTodo: () -> Unit) {
+fun TopAppBar(
+    route: String,
+    saveTodo: () -> Unit,
+    navigateToHome: () -> Unit,
+    navigateToTodo: () -> Unit
+) {
     CenterAlignedTopAppBar(
         title = {
             Text(
@@ -87,7 +93,12 @@ fun TopAppBar(route: String, navigateToHome: () -> Unit, navigateToTodo: () -> U
                     painter = painterResource(id = R.drawable.ic_ok),
                     contentDescription = null,
                     modifier = Modifier
-                        .clickable(onClick = navigateToHome)
+                        .clickable(
+                            onClick = {
+                                saveTodo()
+                                navigateToHome()
+                            }
+                        )
                         .size(35.dp)
                 )
             }
@@ -95,8 +106,21 @@ fun TopAppBar(route: String, navigateToHome: () -> Unit, navigateToTodo: () -> U
     )
 }
 
-@Preview(showSystemUi = true)
+@Preview()
 @Composable
 fun PreviewTopAppBar() {
-    TopAppBar(route = Routes.TODO, navigateToHome = {}) {}
+    Column {
+        TopAppBar(
+            route = Routes.TODO,
+            saveTodo = {},
+            navigateToHome = {},
+            navigateToTodo = {}
+        )
+        TopAppBar(
+            route = Routes.HOME,
+            saveTodo = {},
+            navigateToHome = {},
+            navigateToTodo = {}
+        )
+    }
 }
