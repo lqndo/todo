@@ -17,6 +17,14 @@ class TodoViewModel(
     private val _content = MutableStateFlow("")
     val content: StateFlow<String> = _content
 
+    fun updateTitle(newTitle: String) {
+        _title.value = newTitle
+    }
+
+    fun updateContent(newContent: String) {
+        _content.value = newContent
+    }
+
     fun loadTodo(id: Int) {
         viewModelScope.launch {
             val todo = repository.loadTodo(id)

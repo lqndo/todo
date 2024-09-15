@@ -14,27 +14,28 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.todo.Todo
 import com.example.todo.ui.theme.TodoTheme
 
 @Composable
-fun TodoScreen(id: Int?, loadTodo: (Int) -> Unit, saveTodo: () -> Unit) {
+fun TodoScreen(
+    id: Int?,
+    title: String,
+    content: String,
+    updateTitle: (String) -> Unit,
+    updateContent: (String) -> Unit,
+    loadTodo: (Int) -> Unit,
+    saveTodo: () -> Unit
+) {
     LaunchedEffect(Unit) {
         id?.let {
             loadTodo(id)
         }
     }
-    var titleText by remember { mutableStateOf(TextFieldValue("")) }
-    var contentText by remember { mutableStateOf(TextFieldValue("")) }
 
     Column(
         modifier = Modifier
@@ -43,13 +44,11 @@ fun TodoScreen(id: Int?, loadTodo: (Int) -> Unit, saveTodo: () -> Unit) {
             .padding(15.dp)
     ) {
         OutlinedTextField(
-            value = titleText,
+            value = title,
             modifier = Modifier
                 .height(70.dp)
                 .fillMaxWidth(),
-            onValueChange = {
-                titleText = it
-            },
+            onValueChange = updateTitle,
             label = {
                 Text(
                     text = "Title",
@@ -65,13 +64,11 @@ fun TodoScreen(id: Int?, loadTodo: (Int) -> Unit, saveTodo: () -> Unit) {
         Spacer(modifier = Modifier.height(20.dp))
 
         OutlinedTextField(
-            value = contentText,
+            value = content,
             modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth(),
-            onValueChange = {
-                contentText = it
-            },
+            onValueChange = updateContent,
             label = {
                 Text(
                     text = "Content",
@@ -100,6 +97,10 @@ fun PreviewTodoScreen() {
     TodoTheme {
         TodoScreen(
             id = null,
+            title = todo.title,
+            content = todo.content,
+            updateTitle = {},
+            updateContent = {},
             loadTodo = {},
             saveTodo = {}
         )

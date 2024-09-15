@@ -55,6 +55,8 @@ fun MainScreen(repository: TodoRepository) {
     val homeViewModel = HomeViewModel(repository)
     val todoViewModel = TodoViewModel(repository)
     val todos by homeViewModel.todos.collectAsState()
+    val title by todoViewModel.title.collectAsState()
+    val content by todoViewModel.content.collectAsState()
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -93,6 +95,10 @@ fun MainScreen(repository: TodoRepository) {
 
                 TodoScreen(
                     id = id,
+                    title = title,
+                    content = content,
+                    updateTitle = todoViewModel::updateTitle,
+                    updateContent = todoViewModel::updateContent,
                     loadTodo = todoViewModel::loadTodo,
                     saveTodo = todoViewModel::saveTodo
                 )
