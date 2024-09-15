@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ToDoCard(title: String, content: String) {
+fun TodoCard(title: String, content: String) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -55,6 +55,6 @@ fun ToDoCard(title: String, content: String) {
 
 @Preview(showSystemUi = true)
 @Composable
-fun PreviewCard() {
-    ToDoCard(title = "Title", content = "Content")
+fun PreviewTodoCard() {
+    TodoCard(title = "Title", content = "Content")
 }

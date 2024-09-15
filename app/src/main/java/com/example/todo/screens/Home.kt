@@ -8,7 +8,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.todo.Todo
-import com.example.todo.components.ToDoCard
+import com.example.todo.components.TodoCard
 
 @Composable
 fun HomeScreen(todos: List<Todo>, loadTodos: suspend () -> Unit) {
@@ -20,7 +20,7 @@ fun HomeScreen(todos: List<Todo>, loadTodos: suspend () -> Unit) {
         modifier = Modifier.fillMaxSize()
     ) {
         items(todos) { todo ->
-            ToDoCard(title = todo.title, content = todo.content)
+            TodoCard(title = todo.title, content = todo.content)
         }
     }
 }
